@@ -1,0 +1,40 @@
+<div class="form-card">
+  <h2>AMU Data</h2>
+
+ <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+
+  <!-- ROW 1 -->
+  <div class="row">
+    <div class="col">
+        <label>Facility</label>
+        <select formControlName="facilityId">
+            <option value="">Select Facility</option>
+            <option *ngFor="let facility of facilities" [value]="facility.id">
+            {{ facility.name }}
+            </option>
+        </select>
+    </div>
+
+    <div class="col">
+        <label>Drug Name</label>
+        <input type="text" formControlName="drugName">
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="row">
+    <div class="col">
+        <label>Quantity</label>
+        <input type="number" formControlName="quantity">
+    </div>
+
+    <div class="col">
+      <label>Report Date</label>
+      <input type="date" formControlName="reportDate">
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn">Submit</button>
+
+</form>
+</div>

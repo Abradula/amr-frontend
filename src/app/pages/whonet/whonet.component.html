@@ -1,0 +1,13 @@
+<div class="form-card">
+  <h2>whonet Data</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Sample Name:</label>
+  <input type="text" formControlName="sampleName" />
+
+  <label>Sample Date:</label>
+  <input type="date" formControlName="sampleDate" />
+
+  <button type="submit">Submit</button>
+</form>
+</div>

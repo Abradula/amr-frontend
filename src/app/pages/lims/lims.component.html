@@ -1,0 +1,101 @@
+<div class="form-card">
+  <h2>LIMS Data</h2>
+
+ <form [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+
+  <!-- ROW 1 -->
+  <div class="row">
+    <div class="col">
+      <label>Sample Code</label>
+      <input type="text" formControlName="sampleCode">
+    </div>
+
+    <div class="col">
+      <label>Facility</label>
+      <select formControlName="facilityId">
+        <option value="">Select Facility</option>
+        <option *ngFor="let facility of facilities" [value]="facility.id">
+          {{ facility.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="row">
+    <div class="col">
+      <label>Collection Type</label>
+      <select formControlName="collectionType">
+        <option value="">Select</option>
+        <option value="human">Human</option>
+        <option value="animal">Animal</option>
+        <option value="environment">Environment</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label>Collection Date</label>
+      <input type="date" formControlName="collectionDate">
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>Test Results</h3>
+
+  <!-- ADD BUTTON (HIDDEN WHEN FORM OPEN) -->
+  <button 
+    *ngIf="!showResultForm"
+    type="button"
+    class="add-btn-small"
+    (click)="openResultForm()">
+    + Add Result
+  </button>
+
+  <!-- RESULT FORM -->
+  <div *ngIf="showResultForm" [formGroup]="tempForm" class="result-form">
+
+    <input formControlName="organism" placeholder="Organism">
+    <input formControlName="antibiotic" placeholder="Antibiotic">
+    <input type="number" formControlName="resistance_level" placeholder="Resistance Level">
+
+    <div class="actions">
+      <button type="button" class="save-btn" (click)="saveResult()">Save</button>
+      <button type="button" class="cancel-btn" (click)="closeResultForm()">Cancel</button>
+    </div>
+
+  </div>
+
+  <!-- RESULTS TABLE -->
+  <table *ngIf="results.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Organism</th>
+        <th>Antibiotic</th>
+        <th>Resistance</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let res of results.controls; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ res.get('organism')?.value }}</td>
+        <td>{{ res.get('antibiotic')?.value }}</td>
+        <td>{{ res.get('resistance_level')?.value }}</td>
+        <td>
+          <button type="button" class="remove-btn" (click)="removeResult(i)">
+            Remove
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <button type="submit" class="submit-btn">Submit</button>
+
+</form>
+</div>

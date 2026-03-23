@@ -1,0 +1,52 @@
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.col {
+  flex: 1;
+}
+
+
+.add-btn-small {
+  background: #198754;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.save-btn {
+  background: cyan;
+  color: black;
+  margin-bottom:5px;
+}
+
+.cancel-btn {
+  background: gray;
+  color: white;
+}
+
+.remove-btn {
+  background: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.table th {
+  background: #f1f1f1;
+}
