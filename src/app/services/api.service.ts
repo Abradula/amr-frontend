@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/iot`, data);
   }
 
+  sendWhonet(data: any) {
+    return this.http.post(`${this.baseUrl}/whonet`, data);
+  }
+
   getFacilities() {
     return this.http.get(`${this.baseUrl}/facilities`);
   }
