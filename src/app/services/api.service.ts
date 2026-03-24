@@ -25,4 +25,12 @@ export class ApiService {
   getFacilities() {
     return this.http.get(`${this.baseUrl}/facilities`);
   }
+
+  getCollectionType() {
+    return this.http.get(`${this.baseUrl}/collection-types`);
+  }
+
+  getSampleType(id: any) {
+    return this.http.get(`${this.baseUrl}/sample-types/${id}`);
+  }
 }

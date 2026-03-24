@@ -26,17 +26,23 @@
     <div class="col">
       <label>Collection Type</label>
       <select formControlName="collectionType">
-        <option value="">Select</option>
-        <option value="human">Human</option>
-        <option value="animal">Animal</option>
-        <option value="environment">Environment</option>
+        <option value="" hidden>Select</option>
+        <option *ngFor="let type of collectionTypes" [value]="type.id">
+          {{ type.name }}
+        </option>
       </select>
     </div>
 
     <div class="col">
-      <label>Collection Date</label>
-      <input type="date" formControlName="collectionDate">
+      <label>Sample Taken</label>
+      <select formControlName="sampleType">
+        <option value="" hidden>Select</option>
+        <option *ngFor="let sample of sampleTypes" [value]="sample.id">
+          {{ sample.name }}
+        </option>
+      </select>
     </div>
+
   </div>
 
   <hr>
@@ -56,8 +62,19 @@
   <div *ngIf="showResultForm" [formGroup]="tempForm" class="result-form">
 
     <input formControlName="organism" placeholder="Organism">
-    <input formControlName="antibiotic" placeholder="Antibiotic">
-    <input type="number" formControlName="resistance_level" placeholder="Resistance Level">
+    <select formControlName="antibiotic">
+      <option value="" hidden>Select</option>
+      <option value="Susceptible">Susceptible</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Resistant">Resistant</option>
+    </select>
+
+    <input 
+      *ngIf="tempForm.get('antibiotic')?.value === 'Resistant'"
+      type="number" 
+      formControlName="resistance_level" 
+      placeholder="Resistance Level"
+    >
 
     <div class="actions">
       <button type="button" class="save-btn" (click)="saveResult()">Save</button>

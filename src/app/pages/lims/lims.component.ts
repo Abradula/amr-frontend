@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { sample } from 'rxjs';
 
 @Component({
   selector: 'app-lims',
@@ -15,6 +16,8 @@ export class LimsComponent {
   form: FormGroup;
   result: any;
   facilities: any[] = [];
+  collectionTypes: any[] = [];
+  sampleTypes: any[] = [];
   showResultForm = false;
   tempForm = new FormGroup({
     organism: new FormControl(''),
@@ -27,13 +30,26 @@ export class LimsComponent {
       sampleCode: new FormControl(''),
       facilityId: new FormControl(''),
       collectionType: new FormControl(''),
-      collectionDate: new FormControl(''),
+      sampleType: new FormControl(''),
       results: new FormArray([])
     });
   }
 
   ngOnInit() {
     this.loadFacilities();
+    this.loadCollectionType();
+
+    this.form.get('collectionType')?.valueChanges.subscribe((id) => {
+      this.loadSampleType(id);
+    });
+
+    this.tempForm.get('antibiotic')?.valueChanges.subscribe((value) => {
+      if (value !== 'Resistant') {
+        this.tempForm.patchValue({
+          resistance_level: '0'
+        });
+      }
+    });
   }
 
   get results(): FormArray {
@@ -68,8 +84,7 @@ export class LimsComponent {
     const payload = {
       sample_code: this.form.value.sampleCode,
       facility_id: this.form.value.facilityId,
-      type: this.form.value.collectionType,
-      collection_date: this.form.value.collectionDate,
+      sample_type_id: this.form.value.sampleType,
       results: this.form.value.results
     };
 
@@ -104,6 +119,28 @@ export class LimsComponent {
       },
       error: (err) => {
         console.error('Error fetching facilities:', err);
+      }
+    });
+  }
+
+  loadCollectionType() {
+    this.apiService.getCollectionType().subscribe({
+      next: (res) => {
+        this.collectionTypes = res as any[];
+      },
+      error: (err) => {
+        console.error('Error fetching collection Types:', err);
+      }
+    });
+  }
+
+  loadSampleType(id: any) {
+    this.apiService.getSampleType(id).subscribe({
+      next: (res) => {
+        this.sampleTypes = res as any[];
+      },
+      error: (err) => {
+        console.error('Error fetching sample Types:', err);
       }
     });
   }
