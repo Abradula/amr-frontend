@@ -13,7 +13,7 @@
     <div class="col">
       <label>Facility</label>
       <select formControlName="facilityId">
-        <option value="">Select Facility</option>
+        <option value="" hidden>Select Facility</option>
         <option *ngFor="let facility of facilities" [value]="facility.id">
           {{ facility.name }}
         </option>
