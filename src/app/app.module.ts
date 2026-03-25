@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'whonet', component: WhonetComponent },
   { path: 'amu', component: AmuComponent },
   { path: 'iot', component: IotComponent },
-  { path: 'tracking', component: TrackingComponent },
+  // { path: 'tracking', component: TrackingComponent },
   { path: '', redirectTo: '/lims', pathMatch: 'full' }
 ];
 

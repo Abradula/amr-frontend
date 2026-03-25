@@ -31,6 +31,7 @@ export class LimsComponent {
       facilityId: new FormControl(''),
       collectionType: new FormControl(''),
       sampleType: new FormControl(''),
+      reagent: new FormControl(''),
       results: new FormArray([])
     });
   }
@@ -85,6 +86,7 @@ export class LimsComponent {
       sample_code: this.form.value.sampleCode,
       facility_id: this.form.value.facilityId,
       sample_type_id: this.form.value.sampleType,
+      reagent: this.form.value.reagent,
       results: this.form.value.results
     };
 

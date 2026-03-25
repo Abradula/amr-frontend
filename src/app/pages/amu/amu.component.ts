@@ -21,6 +21,7 @@ export class AmuComponent {
       drugName: new FormControl(''),
       quantity: new FormControl(''),
       reportDate: new FormControl(''),
+      reason: new FormControl(''),
     });
   }
 
@@ -45,7 +46,8 @@ export class AmuComponent {
       drug_name: this.form.value.drugName,
       facility_id: this.form.value.facilityId,
       quantity: this.form.value.quantity,
-      report_date: this.form.value.reportDate
+      report_date: this.form.value.reportDate,
+      reason: this.form.value.reason
     };
 
     this.apiService.sendAmu(payload).subscribe({

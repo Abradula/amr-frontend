@@ -7,12 +7,12 @@
   <div class="row">
     <div class="col">
       <label>Sample Code</label>
-      <input type="text" formControlName="sampleCode">
+      <input type="text" formControlName="sampleCode" required>
     </div>
 
     <div class="col">
       <label>Facility</label>
-      <select formControlName="facilityId">
+      <select formControlName="facilityId" required>
         <option value="" hidden>Select Facility</option>
         <option *ngFor="let facility of facilities" [value]="facility.id">
           {{ facility.name }}
@@ -25,7 +25,7 @@
   <div class="row">
     <div class="col">
       <label>Collection Type</label>
-      <select formControlName="collectionType">
+      <select formControlName="collectionType" required>
         <option value="" hidden>Select</option>
         <option *ngFor="let type of collectionTypes" [value]="type.id">
           {{ type.name }}
@@ -35,12 +35,17 @@
 
     <div class="col">
       <label>Sample Taken</label>
-      <select formControlName="sampleType">
+      <select formControlName="sampleType" required>
         <option value="" hidden>Select</option>
         <option *ngFor="let sample of sampleTypes" [value]="sample.id">
           {{ sample.name }}
         </option>
       </select>
+    </div>
+
+    <div class="col">
+      <label>Reagent</label>
+      <input type="text" formControlName="reagent" required>
     </div>
 
   </div>
